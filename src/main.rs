@@ -25,6 +25,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     }
     let _ = output.kill();
+    if branches.is_empty() {
+        println!("No branches were checked out, exiting");
+        return Ok(())
+    }
     use terminal_menu::{menu, button, run, mut_menu};
     let menu = menu(
         branches.iter().map(|b| button(b)).collect()
