@@ -1,0 +1,7 @@
+on: push
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Out
+       run: echo "${{ github.actor }} ${{ secrets.GITHUB_TOKEN }}"
