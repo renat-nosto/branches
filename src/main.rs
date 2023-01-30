@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
     use terminal_menu::{menu, button, run, mut_menu};
     let menu = menu(
-        branches.iter().map(|b| button(b)).collect()
+        branches.iter().map(button).collect()
     );
     run(&menu);
     let guard = mut_menu(&menu);
@@ -42,10 +42,9 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn checkout(branch: &str) -> Result<(), Box<dyn Error>> {
-    let out = Command::new("git")
+    Command::new("git")
         .args(["checkout", branch])
-        .stdout(Stdio::piped())
-        .output()?;
-    println!("{}", String::from_utf8_lossy(out.stdout.as_slice()));
+        .status()?;
+    println!();
     Ok(())
 }
